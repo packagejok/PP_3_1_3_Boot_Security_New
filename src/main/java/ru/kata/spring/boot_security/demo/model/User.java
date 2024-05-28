@@ -21,11 +21,13 @@ public class User implements UserDetails {
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    public User() {}
+    public User() {
+    }
+
     public User(Long id, String name, String password, Set<Role> roles) {
         this.id = id;
         this.username = name;

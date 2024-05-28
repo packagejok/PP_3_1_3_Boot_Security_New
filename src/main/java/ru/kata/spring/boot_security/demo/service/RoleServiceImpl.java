@@ -25,18 +25,14 @@ public class RoleServiceImpl implements RoleService {
     public Role getRoleById(Long id) {
         return roleRepository.getRoleById(id);
     }
+
     public List<Role> getRolesList() {
-        //return roleDao.getRolesList();
         return roleRepository.findAll();
     }
-    public Set<Role> getSetOfRoles(List<String> rolesId){
-        /*Set<Role> roleSet = new HashSet<>();
-        for (String id: rolesId) {
-            roleSet.add(getRoleById(Long.parseLong(id)));
-        }
-        return roleSet;*/
+
+    public Set<Role> getSetOfRoles(List<String> rolesId) {
         Set<Role> roleSet = new HashSet<>();
-        for (String id: rolesId) {
+        for (String id : rolesId) {
             roleSet.add(roleRepository.getRoleById(Long.valueOf(id)));
         }
         return roleSet;

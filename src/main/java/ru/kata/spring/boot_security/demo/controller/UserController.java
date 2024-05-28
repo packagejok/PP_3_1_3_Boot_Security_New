@@ -13,9 +13,11 @@ import java.security.Principal;
 @RequestMapping("/")
 public class UserController {
     private UserService userService;
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping("/user")
     public String showUser(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());

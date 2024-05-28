@@ -19,27 +19,32 @@ import java.util.Set;
 public class AdminController {
     private UserService userService;
     private RoleServiceImpl roleService;
+
     public AdminController(UserService userService, RoleServiceImpl roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
+
     @GetMapping("/users")
     public String showAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "index";
     }
+
     @GetMapping()
     public String showUser(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         return "admin";
     }
+
     @GetMapping("/new")
     public String addUserForm(@ModelAttribute("user") User user, Model model) {
         List<Role> roles = roleService.getRolesList();
         model.addAttribute("allRoles", roles);
         return "form";
     }
+
     @PostMapping()
     public String saveUser(@ModelAttribute("user") User user,
                            @RequestParam("authorities") List<String> values) {
@@ -48,6 +53,7 @@ public class AdminController {
         userService.createUser(user);
         return "redirect:/admin/users";
     }
+
     @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") User user,
                            @RequestParam("authorities") List<String> values) {
@@ -57,11 +63,13 @@ public class AdminController {
 
         return "redirect:/admin/users";
     }
+
     @GetMapping("/delete")
     public String deleteUser(@RequestParam(value = "id", required = true, defaultValue = "") long id) {
         User user = userService.deleteUser(id);
         return "redirect:/admin/users";
     }
+
     @GetMapping("/edit")
     public String editUserForm(@RequestParam(value = "id", required = true, defaultValue = "") long id, Model model) {
         User user = userService.getUser(id);
