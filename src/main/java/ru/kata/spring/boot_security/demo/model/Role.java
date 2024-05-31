@@ -1,13 +1,16 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import java.util.Objects;
 
 @Entity
-@Data
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
     @Id

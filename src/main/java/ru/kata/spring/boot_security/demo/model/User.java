@@ -1,9 +1,11 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import lombok.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +16,8 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "username")
+
+    @Column(name = "username", unique = true)
     private String username;
     @Column(name = "password")
     private String password;
