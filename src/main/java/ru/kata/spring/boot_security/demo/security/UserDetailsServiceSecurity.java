@@ -23,7 +23,7 @@ public class UserDetailsServiceSecurity implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    //@Override
+    @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
