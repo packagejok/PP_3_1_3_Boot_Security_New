@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.security;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,9 +25,10 @@ public class UserDetailsServiceSecurity implements UserDetailsService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
+        System.out.println(user.getRoles());
         if (null == user) {
             throw new UsernameNotFoundException(String.format("User %s not found", username));
         }
